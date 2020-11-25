@@ -11,6 +11,10 @@ import {CustomBreadcrumbModule} from '../../common/breadcrumb/customBreadcrumb.m
 import {PerecivelPipeModule} from '../../common/pipes/perecivel/perecivel.pipe.module';
 import {RippleModule} from 'primeng/ripple';
 import {UnidadeMedidaPipeModule} from '../../common/pipes/unidadeMedida/unidadeMedida.pipe.module';
+import {ActionBarModule} from '../../common/actionBar/actionBar.module';
+import {ProgressBarModule} from 'primeng/progressbar';
+import {CustomProgressBarModule} from '../../common/customProgressBar/customProgressBar.module';
+import {CustomProgressTextModule} from '../../common/customProgressText/customProgressText.module';
 
 @NgModule({
   declarations: [ItemListComponent],
@@ -24,6 +28,10 @@ import {UnidadeMedidaPipeModule} from '../../common/pipes/unidadeMedida/unidadeM
     PerecivelPipeModule,
     RippleModule,
     UnidadeMedidaPipeModule,
+    ActionBarModule,
+    ProgressBarModule,
+    CustomProgressBarModule,
+    CustomProgressTextModule,
   ],
   providers: [ItemService]
 })

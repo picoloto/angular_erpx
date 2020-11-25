@@ -3,6 +3,7 @@ import {Item} from '../model/item';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {ItemService} from '../service/item.service';
 import {CustomConfirmation} from '../../common/models/customConfirmation';
+import {TipoPipeUnidadeMedidaEnum} from '../../common/models/tipoPipeUnidadeMedidaEnum';
 
 @Component({
   selector: 'app-item-list',
@@ -11,8 +12,8 @@ import {CustomConfirmation} from '../../common/models/customConfirmation';
 })
 export class ItemListComponent implements AfterViewInit {
   itens: Item[] = [];
-  columns: any[];
-  loading = false;
+  loading;
+  tipoPipeUnidadeMedidaEnum = TipoPipeUnidadeMedidaEnum;
 
   constructor(private cdr: ChangeDetectorRef,
               private itemService: ItemService,
@@ -21,18 +22,18 @@ export class ItemListComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this.loading = true;
     this.cdr.detectChanges();
   }
 
   async onLazyLoad() {
-    this.loading = true;
     const itensResult = await this.itemService.getItens();
     this.itens = [...itensResult];
     this.loading = false;
   }
 
   removeItem(item: Item) {
-    this.confirmationService.confirm(new CustomConfirmation(
+    const customConfirmation = new CustomConfirmation(
       'Você realmente deseja excluir esse item?\n Esta ação não poderá ser desfeita',
       async () => {
         this.loading = true;
@@ -40,14 +41,25 @@ export class ItemListComponent implements AfterViewInit {
         this.itemService.setItens(novosItens)
           .then(() => {
             this.itens = novosItens;
-            this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Item excluído com sucesso'});
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Sucesso',
+              detail: 'Item excluído com sucesso',
+              life: 4000
+            });
             this.loading = false;
           }, error => {
-            this.messageService.add({severity: 'error', summary: 'Atenção', detail: error});
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Atenção',
+              detail: error,
+              life: 4000
+            });
             this.loading = false;
           });
       }
-    ));
+    );
+    this.confirmationService.confirm(customConfirmation);
   }
 
   editaItem(item: Item) {

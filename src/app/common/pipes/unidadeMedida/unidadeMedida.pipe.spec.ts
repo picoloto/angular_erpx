@@ -1,8 +1,8 @@
-import { PerecivelPipe } from './unidadeMedida.pipe';
+import {UnidadeMedidaPipe} from './unidadeMedida.pipe';
 
-describe('PerecivelPipe', () => {
+describe('UnidadeMedidaPipe', () => {
   it('create an instance', () => {
-    const pipe = new PerecivelPipe();
+    const pipe = new UnidadeMedidaPipe();
     expect(pipe).toBeTruthy();
   });
 });

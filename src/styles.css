@@ -4,24 +4,40 @@
 }
 
 body {
-  margin: 64px 30px 16px 206px;
+  margin: 114px 30px 16px 206px;
+}
+
+@media only screen and (max-width: 767px) {
+  body {
+    margin: 114px 30px 16px 30px;
+  }
+
+  .custom-progress-bar .p-progressbar {
+    margin-left: 0;
+  }
 }
 
 .p-ripple.ripple-silver .p-ink {
   background: silver;
 }
 
-.p-datatable .p-datatable-loading-icon {
-  font-style: normal;
-}
 
 .space {
   padding-bottom: 16px;
 }
 
+.text-overflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 th.lista-acoes {
   width: 140px;
   text-align: center !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 td.lista-acoes {
@@ -34,4 +50,48 @@ td.lista-acoes {
 
 .p-toast .p-toast-message {
   margin: 2em 0 1rem 0 !important;
+}
+
+.p-dropdown {
+  width: 100%;
+}
+
+.p-inputtext {
+  width: 100%;
+}
+
+.p-inputgroup {
+  margin-bottom: 1rem;
+}
+
+.p-calendar {
+  width: 100%;
+}
+
+.p-inline-message.p-inline-message-warn {
+  background: #FFECB3 !important;
+  border: solid #d9a300 !important;
+  border-width: 0 0 0 6px !important;
+  color: #6d5100 !important;
+  width: 100% !important;
+  justify-content: start !important;
+}
+
+.p-toast .p-toast-message .p-toast-message-content .p-toast-detail {
+  white-space: pre-line;
+}
+
+.p-breadcrumb {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+}
+
+.custom-progress-bar .p-progressbar {
+  top: 96px;
+  width: 100vw;
+  position: fixed;
+  margin-left: -31px;
+  z-index: 13;
 }

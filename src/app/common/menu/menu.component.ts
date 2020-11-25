@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {MenuItem} from 'primeng/api';
 import {MenuStyle} from './menuStyle';
 
@@ -16,6 +16,11 @@ export class MenuComponent implements OnInit {
   constructor() {
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.menuVisivel = event.target.innerWidth >= 768;
+  }
+
   ngOnInit() {
     this.montaMenuStyle();
     this.montaItensMenu();
@@ -26,8 +31,9 @@ export class MenuComponent implements OnInit {
       width: '11em',
       marginTop: '3em',
       padding: '0',
-      boxShadow: '0 7px 14px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22)'
+      boxShadow: 'rgba(0, 0, 0, 0.10) 0px 2px 6px, rgba(0, 0, 0, 0.10) 0px 2px 6px',
     };
+    this.menuVisivel = window.innerWidth >= 768;
   }
 
   private montaItensMenu() {

@@ -1,30 +1,29 @@
-<app-custom-breadcrumb></app-custom-breadcrumb>
-<div class="space"></div>
+<app-action-bar>
+  <div class="p-d-flex p-ai-center p-jc-between">
+    <app-custom-breadcrumb></app-custom-breadcrumb>
+    <p-button icon="pi pi-plus" label="Novo Item" routerLink="/item" styleClass="p-button-text p-mb-1"></p-button>
+  </div>
+</app-action-bar>
+<app-custom-progress-bar *ngIf="!!loading"></app-custom-progress-bar>
+
 <p-card>
+  <app-custom-progress-text *ngIf="!!loading"></app-custom-progress-text>
   <p-table (onLazyLoad)="onLazyLoad()"
+           *ngIf="!loading"
            [lazy]="true"
-           [loading]="loading"
            [responsive]="true"
-           [scrollable]="true"
            [value]="itens"
-           loadingIcon="pi-refresh"
-           scrollHeight="calc(100vh - 200px)">
-    <ng-template pTemplate="caption">
-      <div class="p-d-flex p-ai-center p-jc-between">
-        Itens
-        <p-button icon="pi pi-plus" label="Novo Item" routerLink="/item" styleClass="p-button-text"></p-button>
-      </div>
-    </ng-template>
+           loadingIcon="pi-refresh">
     <ng-template pTemplate="header">
       <tr>
-        <th>Nome</th>
-        <th>Quantidade</th>
-        <th>Unidade de medida</th>
-        <th>Preço</th>
-        <th>Produto perecível</th>
-        <th>Data de validade</th>
-        <th>Data de fabricação</th>
-        <th class="lista-acoes">Ações</th>
+        <th class="text-overflow" title="Nome">Nome</th>
+        <th class="text-overflow" title="Quantidade">Quantidade</th>
+        <th class="text-overflow" title="Unidade de medida">Unidade de medida</th>
+        <th class="text-overflow" title="Preço">Preço</th>
+        <th class="text-overflow" title="Produto perecível">Produto perecível</th>
+        <th class="text-overflow" title="Data de validade">Data de validade</th>
+        <th class="text-overflow" title="Data de fabricação">Data de fabricação</th>
+        <th class="lista-acoes" title="Ações">Ações</th>
       </tr>
     </ng-template>
     <ng-template let-item pTemplate="body">
@@ -39,7 +38,7 @@
         </td>
         <td>
           <span class="p-column-title">Unidade de medida</span>
-          {{item.unidadeMedida | unidadeMedida}}
+          {{item.unidadeMedida | unidadeMedida: tipoPipeUnidadeMedidaEnum.DESCRICAO }}
         </td>
         <td>
           <span class="p-column-title">Preço</span>
@@ -58,23 +57,17 @@
           {{item.dataFabricacao | date:'dd/MM/yyyy'}}
         </td>
         <td class="lista-acoes">
-          <button [routerLink]="['/item', item.id]" class="p-button-rounded p-button-text" icon="pi pi-pencil" pButton pRipple
+          <button [routerLink]="['/item', item.id]" class="p-button-rounded p-button-text" icon="pi pi-pencil" pButton
+                  pRipple
                   type="button"></button>
           <button (click)="removeItem(item)" class="p-button-rounded p-button-text" icon="pi pi-trash" pButton pRipple
                   type="button"></button>
         </td>
       </tr>
     </ng-template>
-    <ng-template pTemplate="loadingbody">
-      <tr style="line-height:34px">
-        <td [attr.colspan]="7">
-          <b class="loading-text">Aguarde, carregando...</b>
-        </td>
-      </tr>
-    </ng-template>
     <ng-template pTemplate="emptymessage">
       <tr style="line-height:34px">
-        <td [attr.colspan]="7">
+        <td [attr.colspan]="8">
           <b>Nenhum registro encontrado</b>
         </td>
       </tr>

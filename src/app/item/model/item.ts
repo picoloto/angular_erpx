@@ -9,4 +9,7 @@ export class Item {
   perecivel: boolean;
   dataValidade: Date;
   dataFabricacao: Date;
+
+  constructor() {
+  }
 }

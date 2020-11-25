@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MenuItem} from 'primeng/api';
 import {Router} from '@angular/router';
 
@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 export class CustomBreadcrumbComponent implements OnInit {
 
   breadcrumbItens: MenuItem[];
+  @Output() listaItensClick = new EventEmitter();
 
   constructor(private router: Router) {
   }
@@ -20,10 +21,10 @@ export class CustomBreadcrumbComponent implements OnInit {
 
   private montaItensBreadcrumb() {
     this.breadcrumbItens = [
-      {label: 'Lista de Itens', routerLink: '/lista-itens'},
+      {label: 'Lista de Itens', style: {cursor: 'pointer'}, command: () => this.listaItensClick.emit()},
     ];
     if (this.router.url !== '/lista-itens') {
-      this.breadcrumbItens.push({label: 'Novo Item', routerLink: '/item'});
+      this.breadcrumbItens.push({label: 'Cadastro de item', routerLink: '/item'});
     }
   }
 }

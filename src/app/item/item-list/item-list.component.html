@@ -1,0 +1,83 @@
+<app-custom-breadcrumb></app-custom-breadcrumb>
+<div class="space"></div>
+<p-card>
+  <p-table (onLazyLoad)="onLazyLoad()"
+           [lazy]="true"
+           [loading]="loading"
+           [responsive]="true"
+           [scrollable]="true"
+           [value]="itens"
+           loadingIcon="pi-refresh"
+           scrollHeight="calc(100vh - 200px)">
+    <ng-template pTemplate="caption">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        Itens
+        <p-button icon="pi pi-plus" label="Novo Item" routerLink="/item" styleClass="p-button-text"></p-button>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nome</th>
+        <th>Quantidade</th>
+        <th>Unidade de medida</th>
+        <th>Preço</th>
+        <th>Produto perecível</th>
+        <th>Data de validade</th>
+        <th>Data de fabricação</th>
+        <th class="lista-acoes">Ações</th>
+      </tr>
+    </ng-template>
+    <ng-template let-item pTemplate="body">
+      <tr>
+        <td>
+          <span class="p-column-title">Nome</span>
+          {{item.nome}}
+        </td>
+        <td>
+          <span class="p-column-title">Quantidade</span>
+          {{item.quantidade}}
+        </td>
+        <td>
+          <span class="p-column-title">Unidade de medida</span>
+          {{item.unidadeMedida | unidadeMedida}}
+        </td>
+        <td>
+          <span class="p-column-title">Preço</span>
+          {{item.preco | currency:'BRL':'symbol'}}
+        </td>
+        <td>
+          <span class="p-column-title">Produto perecível</span>
+          {{item.perecivel | perecivel}}
+        </td>
+        <td>
+          <span class="p-column-title">Data de validade</span>
+          {{item.dataValidade | date:'dd/MM/yyyy'}}
+        </td>
+        <td>
+          <span class="p-column-title">Data de fabricação</span>
+          {{item.dataFabricacao | date:'dd/MM/yyyy'}}
+        </td>
+        <td class="lista-acoes">
+          <button [routerLink]="['/item', item.id]" class="p-button-rounded p-button-text" icon="pi pi-pencil" pButton pRipple
+                  type="button"></button>
+          <button (click)="removeItem(item)" class="p-button-rounded p-button-text" icon="pi pi-trash" pButton pRipple
+                  type="button"></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="loadingbody">
+      <tr style="line-height:34px">
+        <td [attr.colspan]="7">
+          <b class="loading-text">Aguarde, carregando...</b>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr style="line-height:34px">
+        <td [attr.colspan]="7">
+          <b>Nenhum registro encontrado</b>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card>

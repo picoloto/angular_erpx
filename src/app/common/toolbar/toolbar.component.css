@@ -1,0 +1,14 @@
+.toolbar-background {
+  background-color: #3F51B5;
+  width: 100vw;
+  height: 3em;
+  position: fixed;
+  top: 0;
+  left: 0;
+  line-height: 3em;
+  padding-left: 1em;
+}
+
+.toolbar-title {
+  color: white;
+}

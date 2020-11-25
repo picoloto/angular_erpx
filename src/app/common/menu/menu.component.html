@@ -1,0 +1,11 @@
+<p-sidebar [(visible)]="menuVisivel"
+           [dismissible]="false"
+           [modal]="false"
+           [showCloseIcon]="false"
+           [style]="menuStyle"
+           position="left">
+  <div *ngFor="let menu of itensMenu" [routerLink]="menu.routerLink" class="menu-item ripple-silver" pRipple>
+    <i class="menu-item-icon {{menu.icon}}"></i>
+    <span class="menu-item-label">{{menu.label}}</span>
+  </div>
+</p-sidebar>

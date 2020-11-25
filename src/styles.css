@@ -1,1 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  font-family: Roboto, PrimeIcons, sans-serif !important;
+}
+
+body {
+  margin: 64px 30px 16px 206px;
+}
+
+.p-ripple.ripple-silver .p-ink {
+  background: silver;
+}
+
+.p-datatable .p-datatable-loading-icon {
+  font-style: normal;
+}
+
+.space {
+  padding-bottom: 16px;
+}
+
+th.lista-acoes {
+  width: 140px;
+  text-align: center !important;
+}
+
+td.lista-acoes {
+  width: 140px;
+}
+
+.p-confirm-dialog .p-dialog-content {
+  white-space: pre-line;
+}
+
+.p-toast .p-toast-message {
+  margin: 2em 0 1rem 0 !important;
+}

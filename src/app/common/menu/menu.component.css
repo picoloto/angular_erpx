@@ -1,0 +1,14 @@
+.menu-item {
+  padding: 16px;
+  cursor: pointer;
+}
+.menu-item:focus{
+  outline: none;
+}
+.menu-item-icon{
+  font-weight: bold;
+  font-size: 14px;
+}
+.menu-item-label{
+  padding-left: 10px;
+}

@@ -1,16 +1,16 @@
 import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
-  name: 'perecivel'
+  name: 'campoVazio'
 })
-export class PerecivelPipe implements PipeTransform {
+export class CampoVazioPipe implements PipeTransform {
 
   /**
    * @param value  A ser verificado para transformação
    * @returns String processada e transformada conforme value
    */
-  transform(value: boolean): string {
-    return !!value ? 'Sim' : 'Não';
+  transform(value: any): string {
+    return !!value ? value.toString() : '-';
   }
 
 }

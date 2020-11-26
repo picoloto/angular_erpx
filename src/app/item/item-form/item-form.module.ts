@@ -22,7 +22,8 @@ import {ItemService} from '../service/item.service';
 import {ProgressBarModule} from 'primeng/progressbar';
 import {CustomProgressBarModule} from '../../common/components/custom-progress-bar/custom-progress-bar.module';
 import {InputContainerModule} from '../../common/components/input-container/input-container.module';
-import {CheckDateValidityDirectiveModule} from '../../common/directives/check-date-validity.directive.module';
+import {CheckDateValidityDirectiveModule} from '../../common/directives/check-date-validity/check-date-validity.directive.module';
+import {AutoFocusDirectiveModule} from '../../common/directives/auto-focus/auto-focus.directive.module';
 
 @NgModule({
   declarations: [ItemFormComponent],
@@ -48,6 +49,7 @@ import {CheckDateValidityDirectiveModule} from '../../common/directives/check-da
     CustomProgressBarModule,
     InputContainerModule,
     CheckDateValidityDirectiveModule,
+    AutoFocusDirectiveModule,
   ]
 })
 export class ItemFormModule {

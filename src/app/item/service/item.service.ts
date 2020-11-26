@@ -1,80 +1,87 @@
 import {Injectable} from '@angular/core';
 import {Item} from '../model/item';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class ItemService {
+  private listaDeItensDoLocalStorage: Item[] = [];
 
   constructor() {
   }
 
-  // TODO verificar isso
-  // Todos esses metodos podem ser substituidos por Observables
-
-  getItens(): Promise<Item[]> {
-    return new Promise(resolve => {
+  /**
+   * @returns Lista de itens encontrados no LocalStorage
+   */
+  getListaDeItens(): Observable<Item[]> {
+    return new Observable(observer => {
       setTimeout(() => {
-        resolve(JSON.parse(localStorage.getItem('itens')));
-      }, 2000);
+        this.buscaItensNoLocalStorage();
+        observer.next(this.listaDeItensDoLocalStorage);
+      }, 1500);
     });
   }
 
-  setItens(itens: Item[]): Promise<void> {
-    return new Promise(resolve => {
+  /**
+   * @param itens  Lista de itens a ser alterados
+   * @returns Observable<boolean> após realizar o processo
+   */
+  setListaDeItens(itens: Item[]): Observable<boolean> {
+    return new Observable(observer => {
       setTimeout(() => {
-        localStorage.removeItem('itens');
-        localStorage.setItem('itens', JSON.stringify(itens));
-        resolve();
-      }, 2000);
+        this.atualizaItensNoLocalStorage(itens);
+        observer.next(true);
+      }, 1500);
     });
   }
 
-  saveItem(novoItem: Item): Promise<void> {
-    return new Promise(resolve => {
+  /**
+   * @param novoItem  Item a ser alterado
+   * @returns Observable<boolean> após realizar o processo
+   */
+  saveItem(novoItem: Item): Observable<boolean> {
+    return new Observable(observer => {
       setTimeout(() => {
-        const itens = JSON.parse(localStorage.getItem('itens'));
+        this.buscaItensNoLocalStorage();
         if (!novoItem.id) {
-          this.trataNovoItem(novoItem, itens);
+          const idItemMap = this.listaDeItensDoLocalStorage.map(i => i.id);
+          novoItem.id = idItemMap.length > 0 ? idItemMap.reduce((p) => p + 1) + 1 : 1;
         } else {
-          this.trataEdicaoItem(novoItem, itens);
+          this.listaDeItensDoLocalStorage = this.listaDeItensDoLocalStorage.filter(r => r.id !== novoItem.id);
         }
-
-        resolve();
-      }, 2000);
+        this.listaDeItensDoLocalStorage.push(novoItem);
+        this.atualizaItensNoLocalStorage(this.listaDeItensDoLocalStorage);
+        observer.next(true);
+      }, 1500);
     });
   }
 
-  getItemById(id: number): Promise<Item> {
-    return new Promise(resolve => {
+  /**
+   * @param id  Id do Item a ser alterado
+   * @returns Observable<Item> após realizar o processo
+   */
+  getItemById(id: number): Observable<Item> {
+    return new Observable(observer => {
       setTimeout(() => {
         const itens = JSON.parse(localStorage.getItem('itens'));
         const item = itens.find(i => i.id === id);
         if (!!item) {
-          resolve(item);
+          observer.next(item);
         } else {
-          resolve(null);
+          observer.error(`O item de ID ${id} não existe!`);
         }
-      }, 2000);
+      }, 1500);
     });
   }
 
-  private trataNovoItem(novoItem: Item, itens: Item[]) {
-    novoItem.id = itens?.length > 0 ? Math.max.apply(null, itens.map(i => i.id)) + 1 : 1;
-    itens.push(novoItem);
+  private buscaItensNoLocalStorage() {
+    this.listaDeItensDoLocalStorage = JSON.parse(localStorage.getItem('itens'));
+  }
+
+  /**
+   * @param itens  Lista de itens a ser armazenados no LocalStorage
+   */
+  private atualizaItensNoLocalStorage(itens: Item[]) {
     localStorage.removeItem('itens');
     localStorage.setItem('itens', JSON.stringify(itens));
   }
-
-  private trataEdicaoItem(novoItem: Item, itens: Item[]) {
-    itens = itens.filter(r => r.id !== novoItem.id);
-    itens.push(novoItem);
-    localStorage.removeItem('itens');
-    localStorage.setItem('itens', JSON.stringify(itens));
-  }
-
-  // getCountries() {
-  //   return this.http.get<any>('assets/countries.json')
-  //     .toPromise()
-  //     .then(res => <any[]>res.data)
-  //     .then(data => { return data; });
-  // }
 }

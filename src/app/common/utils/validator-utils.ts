@@ -1,8 +1,23 @@
-import {FormControl, ValidationErrors} from '@angular/forms';
+import {AbstractControl, FormControl, ValidationErrors, ValidatorFn} from '@angular/forms';
 
 export class ValidatorUtils {
-  static validatorRequired(fc: FormControl): ValidationErrors {
-    const isInvalid = !fc.value;
-    return isInvalid ? {error: 'Campo obrigatório'} : null;
+
+  /**
+   * @param formControl  FormControl a ser validado
+   * @returns ValidationErrors com a validação
+   */
+  static validatorRequired(formControl: FormControl): ValidationErrors {
+    return !formControl.value ? {error: 'Campo obrigatório'} : null;
+  }
+
+  /**
+   * @param length  Length a ser validado
+   * @returns ValidatorFn com a validação
+   */
+  static validatorMaxLength(length: number): ValidatorFn {
+    return (abstractControl: AbstractControl): { [key: string]: any } | null => {
+      const isInvalid = abstractControl.value?.length > length;
+      return isInvalid ? {error: `Tamanho máximo de ${length} caracteres`} : null;
+    };
   }
 }

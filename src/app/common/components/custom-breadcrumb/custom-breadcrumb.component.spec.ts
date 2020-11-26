@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CustomBreadcrumbComponent } from './custom-breadcrumb.component';
 
-describe('BreadcrumbComponent', () => {
+describe('CustomBreadcrumbComponent', () => {
   let component: CustomBreadcrumbComponent;
   let fixture: ComponentFixture<CustomBreadcrumbComponent>;
 

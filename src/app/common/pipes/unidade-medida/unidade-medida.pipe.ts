@@ -7,8 +7,13 @@ import {TipoPipeUnidadeMedidaEnum} from '../../models/tipo-pipe-unidade-medida.e
 })
 export class UnidadeMedidaPipe implements PipeTransform {
 
-  transform(value: UnidadeMedidaEnum, tipoPipe: TipoPipeUnidadeMedidaEnum): string {
-    switch (value) {
+  /**
+   * @param unidadeMedidaEnum  A ser percorrida para transformação
+   * @param tipoPipe  A ser percorrido para transformação
+   * @returns String processada e transformada conforme unidadeMedidaEnum e tipoPipe
+   */
+  transform(unidadeMedidaEnum: UnidadeMedidaEnum, tipoPipe: TipoPipeUnidadeMedidaEnum): string {
+    switch (unidadeMedidaEnum) {
       case UnidadeMedidaEnum.UNIDADE:
         switch (tipoPipe) {
           case TipoPipeUnidadeMedidaEnum.DESCRICAO:

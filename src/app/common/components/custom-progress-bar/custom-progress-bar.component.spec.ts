@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CustomProgressBarComponent } from './custom-progress-bar.component';
 
-describe('BreadcrumbComponent', () => {
+describe('CustomProgressBarComponent', () => {
   let component: CustomProgressBarComponent;
   let fixture: ComponentFixture<CustomProgressBarComponent>;
 

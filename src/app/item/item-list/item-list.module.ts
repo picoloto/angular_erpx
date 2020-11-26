@@ -15,6 +15,7 @@ import {ActionBarModule} from '../../common/components/action-bar/action-bar.mod
 import {ProgressBarModule} from 'primeng/progressbar';
 import {CustomProgressBarModule} from '../../common/components/custom-progress-bar/custom-progress-bar.module';
 import {CustomProgressTextModule} from '../../common/components/custom-progress-text/custom-progress-text.module';
+import {CampoVazioPipeModule} from '../../common/pipes/campo-vazio/campo-vazio.pipe.module';
 
 @NgModule({
   declarations: [ItemListComponent],
@@ -32,6 +33,7 @@ import {CustomProgressTextModule} from '../../common/components/custom-progress-
     ProgressBarModule,
     CustomProgressBarModule,
     CustomProgressTextModule,
+    CampoVazioPipeModule,
   ],
   providers: [ItemService]
 })

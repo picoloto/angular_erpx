@@ -17,6 +17,8 @@ import {ToastModule} from 'primeng/toast';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {MenuComponent} from './common/components/menu/menu.component';
 import {ToolbarComponent} from './common/components/toolbar/toolbar.component';
+import {HttpClientModule} from '@angular/common/http';
+import {MenuService} from './common/components/menu/menu.service';
 
 registerLocaleData(ptBr);
 
@@ -35,7 +37,8 @@ registerLocaleData(ptBr);
     ToolbarModule,
     ButtonModule,
     ToastModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    HttpClientModule,
   ],
   bootstrap: [AppComponent],
   exports: [ToolbarComponent, MenuComponent],
@@ -46,6 +49,7 @@ registerLocaleData(ptBr);
     ViewportRuler,
     MessageService,
     ConfirmationService,
+    MenuService,
     {provide: LOCALE_ID, useValue: 'pt-BR'}],
 })
 export class AppModule {

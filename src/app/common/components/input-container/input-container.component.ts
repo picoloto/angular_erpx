@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {AbstractControl, FormControl} from '@angular/forms';
+import {AbstractControl} from '@angular/forms';
 
 
 @Component({
@@ -11,7 +11,8 @@ export class InputContainerComponent implements OnInit {
 
   @Input() control: AbstractControl;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

@@ -7,9 +7,13 @@
   left: 0;
   line-height: 3em;
   padding-left: 1em;
-  z-index: 10;
+  z-index: 99999;
 }
 
 .toolbar-title {
   color: white;
+}
+
+.toolbar-menu-icone {
+  padding-right: 14px;
 }

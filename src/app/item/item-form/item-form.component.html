@@ -10,9 +10,11 @@
     <div class="p-grid">
       <div class="p-col-12">
         <app-input-container [control]="itemForm.controls.nome">
-          <input autocomplete="off"
+          <input appAutoFocus
+                 autocomplete="off"
                  formControlName="nome"
                  id="nome"
+                 mask="S*"
                  pInputText
                  type="text">
           <label for="nome">Nome *</label>

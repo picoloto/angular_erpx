@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ActionBarComponent } from './action-bar.component';
 
-describe('BreadcrumbComponent', () => {
+describe('ActionBarComponent', () => {
   let component: ActionBarComponent;
   let fixture: ComponentFixture<ActionBarComponent>;
 

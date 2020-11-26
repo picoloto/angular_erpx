@@ -16,12 +16,12 @@
     <ng-template pTemplate="header">
       <tr>
         <th title="Nome">Nome</th>
-        <th  title="Quantidade">Quantidade</th>
-        <th  title="Unidade de medida">Unidade de medida</th>
-        <th  title="Preço">Preço</th>
-        <th  title="Produto perecível">Produto perecível</th>
+        <th title="Quantidade">Quantidade</th>
+        <th title="Unidade de medida">Unidade de medida</th>
+        <th title="Preço">Preço</th>
+        <th title="Produto perecível">Produto perecível</th>
         <th title="Data de validade">Data de validade</th>
-        <th  title="Data de fabricação">Data de fabricação</th>
+        <th title="Data de fabricação">Data de fabricação</th>
         <th class="lista-acoes" title="Ações">Ações</th>
       </tr>
     </ng-template>
@@ -33,7 +33,7 @@
         </td>
         <td>
           <span class="p-column-title">Quantidade</span>
-          {{item.quantidade}}
+          {{item.quantidade | campoVazio}}
         </td>
         <td>
           <span class="p-column-title">Unidade de medida</span>
@@ -49,7 +49,7 @@
         </td>
         <td>
           <span class="p-column-title">Data de validade</span>
-          {{item.dataValidade | date:'dd/MM/yyyy'}}
+          {{item.dataValidade | date:'dd/MM/yyyy' | campoVazio}}
         </td>
         <td>
           <span class="p-column-title">Data de fabricação</span>
@@ -63,7 +63,7 @@
                   pButton
                   pRipple
                   type="button"></button>
-          <button (click)="removeItem(item)"
+          <button (click)="removeItemClick(item)"
                   class="p-button-rounded p-button-text acao"
                   icon="pi pi-trash"
                   pButton

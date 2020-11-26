@@ -31,10 +31,11 @@ export class ItemService {
   saveItem(novoItem: Item): Promise<void> {
     return new Promise(resolve => {
       setTimeout(() => {
+        const itens = JSON.parse(localStorage.getItem('itens'));
         if (!novoItem.id) {
-          this.trataNovoItem(novoItem);
+          this.trataNovoItem(novoItem, itens);
         } else {
-          this.trataEdicaoItem(novoItem);
+          this.trataEdicaoItem(novoItem, itens);
         }
 
         resolve();
@@ -42,15 +43,38 @@ export class ItemService {
     });
   }
 
-  private trataNovoItem(novoItem: Item) {
-    const itens = JSON.parse(localStorage.getItem('itens'));
+  getItemById(id: number): Promise<Item> {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        const itens = JSON.parse(localStorage.getItem('itens'));
+        const item = itens.find(i => i.id === id);
+        if (!!item) {
+          resolve(item);
+        } else {
+          resolve(null);
+        }
+      }, 2000);
+    });
+  }
+
+  private trataNovoItem(novoItem: Item, itens: Item[]) {
     novoItem.id = itens?.length > 0 ? Math.max.apply(null, itens.map(i => i.id)) + 1 : 1;
     itens.push(novoItem);
     localStorage.removeItem('itens');
     localStorage.setItem('itens', JSON.stringify(itens));
   }
 
-  private trataEdicaoItem(novoItem: Item) {
-
+  private trataEdicaoItem(novoItem: Item, itens: Item[]) {
+    itens = itens.filter(r => r.id !== novoItem.id);
+    itens.push(novoItem);
+    localStorage.removeItem('itens');
+    localStorage.setItem('itens', JSON.stringify(itens));
   }
+
+  // getCountries() {
+  //   return this.http.get<any>('assets/countries.json')
+  //     .toPromise()
+  //     .then(res => <any[]>res.data)
+  //     .then(data => { return data; });
+  // }
 }

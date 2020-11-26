@@ -1,4 +1,4 @@
-export class DatePtBr {
+export class DatePtbr {
   firstDayOfWeek = 0;
   dayNames = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
   dayNamesShort = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];

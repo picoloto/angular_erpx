@@ -4,8 +4,8 @@ import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-custom-breadcrumb',
-  templateUrl: './customBreadcrumb.component.html',
-  styleUrls: ['./customBreadcrumb.component.css']
+  templateUrl: './custom-breadcrumb.component.html',
+  styleUrls: ['./custom-breadcrumb.component.css']
 })
 export class CustomBreadcrumbComponent implements OnInit {
 

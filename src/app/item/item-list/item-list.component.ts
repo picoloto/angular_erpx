@@ -2,8 +2,8 @@ import {AfterViewInit, ChangeDetectorRef, Component} from '@angular/core';
 import {Item} from '../model/item';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {ItemService} from '../service/item.service';
-import {CustomConfirmation} from '../../common/models/customConfirmation';
-import {TipoPipeUnidadeMedidaEnum} from '../../common/models/tipoPipeUnidadeMedidaEnum';
+import {CustomConfirmation} from '../../common/models/custom-confirmation';
+import {TipoPipeUnidadeMedidaEnum} from '../../common/models/tipo-pipe-unidade-medida.enum';
 
 @Component({
   selector: 'app-item-list',
@@ -60,9 +60,5 @@ export class ItemListComponent implements AfterViewInit {
       }
     );
     this.confirmationService.confirm(customConfirmation);
-  }
-
-  editaItem(item: Item) {
-    console.log('editaItem', item);
   }
 }

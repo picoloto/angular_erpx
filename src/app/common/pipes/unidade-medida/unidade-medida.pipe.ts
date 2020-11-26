@@ -1,6 +1,6 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {UnidadeMedidaEnum} from '../../../item/model/unidadeMedidaEnum';
-import {TipoPipeUnidadeMedidaEnum} from '../../models/tipoPipeUnidadeMedidaEnum';
+import {UnidadeMedidaEnum} from '../../../item/model/unidade-medida.enum';
+import {TipoPipeUnidadeMedidaEnum} from '../../models/tipo-pipe-unidade-medida.enum';
 
 @Pipe({
   name: 'unidadeMedida'

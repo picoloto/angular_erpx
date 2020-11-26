@@ -1,19 +1,19 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
-import {ActionBarComponent} from './actionBar.component';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
+import {InputContainerComponent} from './input-container.component';
 
 @NgModule({
-  declarations: [ActionBarComponent],
+  declarations: [InputContainerComponent],
   imports: [
     CommonModule,
     BreadcrumbModule
   ],
   exports: [
-    ActionBarComponent
+    InputContainerComponent
   ],
   providers: []
 })
-export class ActionBarModule {
+export class InputContainerModule {
 }

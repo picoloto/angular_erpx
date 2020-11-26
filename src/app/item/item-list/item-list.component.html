@@ -12,17 +12,16 @@
            *ngIf="!loading"
            [lazy]="true"
            [responsive]="true"
-           [value]="itens"
-           loadingIcon="pi-refresh">
+           [value]="itens">
     <ng-template pTemplate="header">
       <tr>
-        <th class="text-overflow" title="Nome">Nome</th>
-        <th class="text-overflow" title="Quantidade">Quantidade</th>
-        <th class="text-overflow" title="Unidade de medida">Unidade de medida</th>
-        <th class="text-overflow" title="Preço">Preço</th>
-        <th class="text-overflow" title="Produto perecível">Produto perecível</th>
-        <th class="text-overflow" title="Data de validade">Data de validade</th>
-        <th class="text-overflow" title="Data de fabricação">Data de fabricação</th>
+        <th title="Nome">Nome</th>
+        <th  title="Quantidade">Quantidade</th>
+        <th  title="Unidade de medida">Unidade de medida</th>
+        <th  title="Preço">Preço</th>
+        <th  title="Produto perecível">Produto perecível</th>
+        <th title="Data de validade">Data de validade</th>
+        <th  title="Data de fabricação">Data de fabricação</th>
         <th class="lista-acoes" title="Ações">Ações</th>
       </tr>
     </ng-template>
@@ -57,10 +56,18 @@
           {{item.dataFabricacao | date:'dd/MM/yyyy'}}
         </td>
         <td class="lista-acoes">
-          <button [routerLink]="['/item', item.id]" class="p-button-rounded p-button-text" icon="pi pi-pencil" pButton
+          <span class="p-column-title">Ações</span>
+          <button [routerLink]="['/item', item.id]"
+                  class="p-button-rounded p-button-text acao"
+                  icon="pi pi-pencil"
+                  pButton
                   pRipple
                   type="button"></button>
-          <button (click)="removeItem(item)" class="p-button-rounded p-button-text" icon="pi pi-trash" pButton pRipple
+          <button (click)="removeItem(item)"
+                  class="p-button-rounded p-button-text acao"
+                  icon="pi pi-trash"
+                  pButton
+                  pRipple
                   type="button"></button>
         </td>
       </tr>

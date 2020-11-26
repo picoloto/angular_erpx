@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
-import {CustomBreadcrumbComponent} from './customBreadcrumb.component';
+import {CustomBreadcrumbComponent} from './custom-breadcrumb.component';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
 
 @NgModule({

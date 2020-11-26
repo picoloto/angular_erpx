@@ -1,17 +1,18 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {ConfirmationService, MessageService, SelectItem} from 'primeng/api';
-import {UnidadeMedidaEnum} from '../model/unidadeMedidaEnum';
-import {UnidadeMedidaPipe} from '../../common/pipes/unidadeMedida/unidadeMedida.pipe';
-import {TipoPipeUnidadeMedidaEnum} from '../../common/models/tipoPipeUnidadeMedidaEnum';
-import {CurrencyPtBr} from '../../common/models/currencyPtBr';
-import {DatePtBr} from '../../common/models/datePtBr';
-import {CustomConfirmation} from '../../common/models/customConfirmation';
-import {FormUtils} from '../../common/utils/formUtils';
-import {ObjectUtils} from '../../common/utils/objectUtils';
+import {UnidadeMedidaEnum} from '../model/unidade-medida.enum';
+import {UnidadeMedidaPipe} from '../../common/pipes/unidade-medida/unidade-medida.pipe';
+import {TipoPipeUnidadeMedidaEnum} from '../../common/models/tipo-pipe-unidade-medida.enum';
+import {CurrencyPtbr} from '../../common/models/currency-ptbr';
+import {DatePtbr} from '../../common/models/date-ptbr';
+import {CustomConfirmation} from '../../common/models/custom-confirmation';
+import {FormUtils} from '../../common/utils/form-utils';
+import {ObjectUtils} from '../../common/utils/object-utils';
 import {Item} from '../model/item';
 import {ItemService} from '../service/item.service';
+import {ValidatorUtils} from '../../common/utils/validator-utils';
 
 @Component({
   selector: 'app-item-form',
@@ -24,11 +25,12 @@ export class ItemFormComponent implements OnInit {
   unidadeMedidaList: SelectItem[];
   quantidadeMask: string;
   itemForm: FormGroup;
-  currencyPtBr = new CurrencyPtBr();
-  datePtBr = new DatePtBr();
+  currencyPtBr = new CurrencyPtbr();
+  datePtBr = new DatePtbr();
   dataAtual = new Date();
   vencido = false;
   dataMaximaFabricacao: Date;
+  item = new Item();
 
   constructor(
     private route: ActivatedRoute,
@@ -46,27 +48,33 @@ export class ItemFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.route.snapshot.paramMap.get('id')) {
-      // TODO Editar aqui
+    const idItem = this.route.snapshot.paramMap.get('id');
+    if (!!idItem) {
+      this.itemForm.disable();
+      this.buscarItem(Number(idItem));
     }
   }
 
   onSalvarClick() {
     if (this.itemForm.valid) {
       this.itemForm.disable();
-      console.log(this.itemForm.value);
-      const objectItem = ObjectUtils.objectFromForm(this.itemForm, new Item());
-      console.log('objectItem', objectItem);
+      const objectItem = ObjectUtils.objectFromForm(this.itemForm, this.item);
+
       this.itemService.saveItem(objectItem).then(r => {
         this.itemForm.enable();
         this.itemForm.reset();
-        this.itemForm.controls.unidadeMedida.setValue(UnidadeMedidaEnum.LITRO);
+        FormUtils.formFromObject(this.itemForm, this.item);
+        if (!this.itemForm.controls.unidadeMedida.value) {
+          this.itemForm.controls.unidadeMedida.setValue(UnidadeMedidaEnum.LITRO);
+        }
+
         this.messageService.add({
           severity: 'success',
           summary: 'Sucesso',
           detail: 'Item salvo com sucesso',
           life: 4000
         });
+        this.router.navigate(['/item', this.item.id]);
       });
     } else {
       FormUtils.markAsDirtyAllControls(this.itemForm);
@@ -79,15 +87,6 @@ export class ItemFormComponent implements OnInit {
     }
   }
 
-  updateProfile() {
-    this.itemForm.patchValue({
-      firstName: 'Nancy',
-      address: {
-        street: '123 Drew Street'
-      }
-    });
-  }
-
   changeUnidadeMedida() {
     this.itemForm.controls.quantidade.setValue(null);
     this.quantidadeMask = this.unidadeMedidaPipe.transform(this.itemForm.controls.unidadeMedida.value, TipoPipeUnidadeMedidaEnum.MASK);
@@ -96,7 +95,7 @@ export class ItemFormComponent implements OnInit {
   changePerecivel() {
     const dataValidadeFormControl = this.itemForm.controls.dataValidade;
     if (!!this.itemForm.controls.perecivel.value) {
-      dataValidadeFormControl.setValidators([Validators.required]);
+      dataValidadeFormControl.setValidators([ValidatorUtils.validatorRequired]);
     } else {
       dataValidadeFormControl.clearValidators();
     }
@@ -122,13 +121,13 @@ export class ItemFormComponent implements OnInit {
 
   private montaFormGroup() {
     this.itemForm = this.formBuilder.group({
-      nome: [null, Validators.required],
-      unidadeMedida: [UnidadeMedidaEnum.LITRO, Validators.required],
+      nome: [null, ValidatorUtils.validatorRequired],
+      unidadeMedida: [UnidadeMedidaEnum.LITRO, ValidatorUtils.validatorRequired],
       quantidade: [null],
-      preco: [null, Validators.required],
+      preco: [null, ValidatorUtils.validatorRequired],
       perecivel: [false],
       dataValidade: [null],
-      dataFabricacao: [null, Validators.required],
+      dataFabricacao: [null, ValidatorUtils.validatorRequired],
     });
   }
 
@@ -174,5 +173,13 @@ export class ItemFormComponent implements OnInit {
         life: 4000
       });
     }
+  }
+
+  private buscarItem(idItem: number) {
+    this.itemService.getItemById(idItem).then(r => {
+      this.item = ObjectUtils.clone(r);
+      this.itemForm.enable();
+      FormUtils.formFromObject(this.itemForm, this.item);
+    });
   }
 }

@@ -1,6 +1,6 @@
 import {CurrencyMaskInputMode} from 'ngx-currency';
 
-export class CurrencyPtBr {
+export class CurrencyPtbr {
   prefix = 'R$ ';
   precision = 2;
   allowNegative = false;

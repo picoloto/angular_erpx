@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CustomProgressBarComponent } from './customProgressBar.component';
+import { CustomBreadcrumbComponent } from './custom-breadcrumb.component';
 
 describe('BreadcrumbComponent', () => {
-  let component: CustomProgressBarComponent;
-  let fixture: ComponentFixture<CustomProgressBarComponent>;
+  let component: CustomBreadcrumbComponent;
+  let fixture: ComponentFixture<CustomBreadcrumbComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CustomProgressBarComponent ]
+      declarations: [ CustomBreadcrumbComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CustomProgressBarComponent);
+    fixture = TestBed.createComponent(CustomBreadcrumbComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

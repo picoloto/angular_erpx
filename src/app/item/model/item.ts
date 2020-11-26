@@ -1,4 +1,4 @@
-import {UnidadeMedidaEnum} from './unidadeMedidaEnum';
+import {UnidadeMedidaEnum} from './unidade-medida.enum';
 
 export class Item {
   id: number;

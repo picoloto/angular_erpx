@@ -9,41 +9,32 @@
   <form [formGroup]="itemForm">
     <div class="p-grid">
       <div class="p-col-12">
-        <div class="p-field">
-          <div class="p-float-label">
-            <input formControlName="nome"
-                   id="nome"
-                   pInputText
-                   type="text">
-            <label for="nome">Nome *</label>
-          </div>
-          <small
-            *ngIf="!!itemForm.controls.nome.invalid  && (itemForm.controls.nome.touched || itemForm.controls.nome.dirty)"
-            class="p-invalid"
-            id="firstName-help">Obrigatório</small>
-        </div>
+        <app-input-container [control]="itemForm.controls.nome">
+          <input autocomplete="off"
+                 formControlName="nome"
+                 id="nome"
+                 pInputText
+                 type="text">
+          <label for="nome">Nome *</label>
+        </app-input-container>
       </div>
 
       <div class="p-col-12 p-md-12 p-lg-4">
-        <div class="p-field">
-          <div class="p-float-label">
-            <p-dropdown (onChange)="changeUnidadeMedida()"
-                        [options]="unidadeMedidaList"
-                        formControlName="unidadeMedida"
-                        id="unidadeMedida"></p-dropdown>
-            <label for="unidadeMedida">Unidade de medida *</label>
-          </div>
-          <small
-            *ngIf="!!itemForm.controls.unidadeMedida.invalid  && (itemForm.controls.unidadeMedida.touched || itemForm.controls.unidadeMedida.dirty)"
-            class="p-invalid"
-            id="unidadeMedida-help">Obrigatório</small>
-        </div>
+        <app-input-container [control]="itemForm.controls.unidadeMedida">
+          <p-dropdown (onChange)="changeUnidadeMedida()"
+                      [options]="unidadeMedidaList"
+                      formControlName="unidadeMedida"
+                      id="unidadeMedida"></p-dropdown>
+          <label for="unidadeMedida">Unidade de medida *</label>
+        </app-input-container>
       </div>
 
       <div class="p-col-12 p-md-12 p-lg-4">
         <div class="p-inputgroup">
           <div class="p-float-label">
-            <input formControlName="quantidade"
+            <input [dropSpecialCharacters]="false"
+                   autocomplete="off"
+                   formControlName="quantidade"
                    id="quantidade"
                    mask="{{quantidadeMask}}"
                    pInputText
@@ -56,22 +47,17 @@
       </div>
 
       <div class="p-col-12 p-md-12 p-lg-4">
-        <div class="p-field">
-          <div class="p-float-label">
-            <input
-              [options]="currencyPtBr"
-              currencyMask
-              formControlName="preco"
-              id="preco"
-              pInputText
-              type="text">
-            <label for="preco">Preço *</label>
-          </div>
-          <small
-            *ngIf="!!itemForm.controls.preco.invalid  && (itemForm.controls.preco.touched || itemForm.controls.preco.dirty)"
-            class="p-invalid"
-            id="preco-help">Obrigatório</small>
-        </div>
+        <app-input-container [control]="itemForm.controls.preco">
+          <input
+            [options]="currencyPtBr"
+            autocomplete="off"
+            currencyMask
+            formControlName="preco"
+            id="preco"
+            pInputText
+            type="text">
+          <label for="preco">Preço *</label>
+        </app-input-container>
       </div>
 
       <div class="p-col-12">
@@ -92,43 +78,33 @@
       </div>
 
       <div class="p-col-12 p-md-6">
-        <div class="p-field">
-          <div class="p-float-label">
-            <p-calendar (onInput)="selectDataValidade()"
-                        (onSelect)="selectDataValidade()"
-                        [locale]="datePtBr"
-                        [showIcon]="true"
-                        dateFormat="dd/mm/yy"
-                        formControlName="dataValidade"
-                        id="dataValidade"
-                        inputId="dataValidade"></p-calendar>
-            <label
-              for="dataValidade">{{!!itemForm.controls.perecivel.value ? 'Data de validade *' : 'Data de validade'}}</label>
-          </div>
-          <small
-            *ngIf="!!itemForm.controls.dataValidade.invalid  && (itemForm.controls.dataValidade.touched || itemForm.controls.dataValidade.dirty)"
-            class="p-invalid"
-            id="dataValidade-help">Obrigatório</small>
-        </div>
+        <app-input-container [control]="itemForm.controls.dataValidade">
+          <p-calendar (onInput)="selectDataValidade()"
+                      (onSelect)="selectDataValidade()"
+                      [locale]="datePtBr"
+                      [showIcon]="true"
+                      appCheckDateValidity
+                      dateFormat="dd/mm/yy"
+                      formControlName="dataValidade"
+                      id="dataValidade"
+                      inputId="dataValidade"></p-calendar>
+          <label
+            for="dataValidade">{{!!itemForm.controls.perecivel.value ? 'Data de validade *' : 'Data de validade'}}</label>
+        </app-input-container>
       </div>
 
       <div class="p-col-12 p-md-6">
-        <div class="p-field">
-          <div class="p-float-label">
-            <p-calendar [locale]="datePtBr"
-                        [maxDate]="dataMaximaFabricacao"
-                        [showIcon]="true"
-                        dateFormat="dd/mm/yy"
-                        formControlName="dataFabricacao"
-                        id="dataFabricacao"
-                        inputId="dataFabricacao"></p-calendar>
-            <label for="dataFabricacao">Data de fabricação *</label>
-          </div>
-          <small
-            *ngIf="!!itemForm.controls.dataFabricacao.invalid  && (itemForm.controls.dataFabricacao.touched || itemForm.controls.dataFabricacao.dirty)"
-            class="p-invalid"
-            id="dataFabricacao-help">Obrigatório</small>
-        </div>
+        <app-input-container [control]="itemForm.controls.dataFabricacao">
+          <p-calendar [locale]="datePtBr"
+                      [maxDate]="dataMaximaFabricacao"
+                      [showIcon]="true"
+                      appCheckDateValidity
+                      dateFormat="dd/mm/yy"
+                      formControlName="dataFabricacao"
+                      id="dataFabricacao"
+                      inputId="dataFabricacao"></p-calendar>
+          <label for="dataFabricacao">Data de fabricação *</label>
+        </app-input-container>
       </div>
 
       <div class="p-col-12">

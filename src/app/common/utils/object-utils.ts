@@ -8,4 +8,8 @@ export class ObjectUtils {
     });
     return object;
   }
+
+  public static clone(object: any): any {
+    return JSON.parse(JSON.stringify(object));
+  }
 }
